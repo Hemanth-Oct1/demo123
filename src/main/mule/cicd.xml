@@ -10,12 +10,13 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	</http:listener-config>
 	<flow name="cicdFlow" doc:id="ead5960d-b267-4068-aaf2-19d6627d477f" >
 		<http:listener doc:name="Listener" doc:id="5be89736-3a67-4324-9592-ed2334669b46" config-ref="HTTP_Listener_config" path="/path"/>
+		<set-variable value="#[payload]" doc:name="Set Variable" doc:id="7b65b9af-9024-4112-af16-da85a3c37fa2" variableName="input"/>
 		<ee:transform doc:name="Transform Message" doc:id="dec673d1-70fc-4b19-98d6-8e7ab0febfd5" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
-payload]]></ee:set-payload>
+vars."input"]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
